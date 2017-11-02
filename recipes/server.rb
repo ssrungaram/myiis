@@ -8,9 +8,15 @@ powershell_script 'Install IIS' do
   action :run
 end
 
-file 'C:\inetpub\wwwroot\Default.htm' do
-  content 'Hello, world!'
-  rights :read, 'Everyone'
+# file 'C:\inetpub\wwwroot\Default.htm' do
+template 'C:\inetpub\wwwroot\Default.htm' do
+  source 'Default.htm.erb'
+  # content "<h1>Hello, world!</h1>
+  # <h2>PLATFORM: #{node['platform']}</h2>
+  # <h2>HOSTNAME: #{node['hostname']}</h2>
+  # <h2>MEMORY: #{node['memory']}</h2>
+  # <h2>CPU Mhz: #{node['cpu']['0']['mhz']}</h2>"
+  # rights :read, 'Everyone'
 end
 
 service 'w3svc' do
